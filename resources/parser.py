@@ -25,13 +25,34 @@ def categorize_words_by_length(file_path):
     except Exception as e:
         print(f"An error occurred: {e}")
         return {}
+def add_quote_to_csv(file_path):
+    try:
+        # Read the original file
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+        
+        # Add a double quote at the end of each line
+        modified_lines = [line.rstrip('\n') + '",' + '\n' for line in lines]
+        
+        # Write the modified content back to the file
+        with open(file_path, 'w') as file:
+            file.writelines(modified_lines)
+        
+        print(f"Successfully added quotes to the end of each line in {file_path}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-# File path to the CSV file
-file_path = "words.csv"
+# Provide the path to your CSV file
+file_path = 'level03_words.csv'  # Replace with the actual file path
+add_quote_to_csv(file_path)
 
-# Categorize words and print the results
-word_categories = categorize_words_by_length(file_path)
+# # File path to the CSV file
+# file_path = "words.csv"
 
-# Print categorized words
-for length, words in sorted(word_categories.items()):
-    print(f"{length}-letter words: {', '.join(words[:10])}...")  # Display first 10 words for brevity
+# # Categorize words and print the results
+# word_categories = categorize_words_by_length(file_path)
+
+# # Print categorized words
+# for length, words in sorted(word_categories.items()):
+#     print(f"{length}-letter words: {', '.join(words[:10])}")
+#     break # Display first 10 words for brevity
